@@ -26,7 +26,7 @@ Site da campanha **fictícia** de Sofia Candido (Soso), candidata à Presidênci
 
 É um **site estático de página única**, feito com HTML, CSS e JavaScript puros, sem framework e sem etapa de build. O navegador baixa o `index.html`, que carrega o estilo (`src/style.css`) e três scripts, nesta ordem:
 
-1. **`src/main.js`**: interações do site, como a navegação por abas, a urna, as calculadoras, o karaokê do jingle, o quiz e o Portal da Transparência.
+1. **`src/main.js`**: interações do site, como a navegação por abas, a urna, as calculadoras, o quiz e o Portal da Transparência.
 2. **`src/licoes.js`**: banco de lições do app educacional (constante global `MATERIAS`).
 3. **`src/trilha.js`**: o protótipo do app **Trilha do Conhecimento**, que usa as lições do arquivo anterior.
 
@@ -61,7 +61,7 @@ O app Trilha do Conhecimento guarda pontos, vidas, progresso e preferências no 
   3. Mulheres e licença-paternidade de 90 dias.
 - **Calculadora do transporte:** mostra quantas horas por ano a pessoa passa em deslocamento.
 - **Distribuidor da licença-paternidade:** divide os 90 dias em blocos de 15 ao longo dos meses.
-- **Karaokê do jingle:** áudio com a letra destacada no tempo certo.
+- **Karaokê do jingle:** um lyric video (vídeo com a letra animada) para cantar junto. As palavras entram no ritmo da música, com as cores da Soso e do Brasil.
 - **Quiz:** descubra qual pauta combina mais com você.
 - **Figurinhas:** galeria do pacote de figurinhas de WhatsApp da campanha.
 - **Rodapé:** nomes da equipe e da professora, com link para o LinkedIn de cada uma.
@@ -132,13 +132,13 @@ Protótipo navegável, dentro de um celular desenhado na tela, do aplicativo gra
 ├── vercel.json           # configuração de cache para a Vercel
 └── src/
     ├── style.css         # estilos do site e do app
-    ├── main.js           # interações do site: abas, urna, calculadoras, jingle, quiz, transparência
+    ├── main.js           # interações do site: abas, urna, calculadoras, quiz, transparência
     ├── licoes.js         # banco de lições das 8 matérias (MATERIAS)
     ├── trilha.js         # app Trilha do Conhecimento: telas, motor das lições, estado e modo offline
     └── assets/
         ├── favicon.svg, apple-touch-icon.png
         ├── soso-hero.webp, soso-urna.webp
-        ├── jingle.mp3
+        ├── jingle-karaoke.mp4, jingle-karaoke.webp   # lyric video do jingle e sua capa
         └── figurinhas/figurinha-01.webp … figurinha-08.webp
 ```
 
@@ -164,7 +164,8 @@ Protótipo navegável, dentro de um celular desenhado na tela, do aplicativo gra
 |---|---|
 | [Claude](https://claude.ai) (Anthropic) | Apoio na programação, nos textos e na organização do projeto |
 | Python, Pillow e rembg | Recorte das fotos e montagem das figurinhas |
-| FFmpeg | Tratamento do áudio do jingle |
+| Python, Pillow e FFmpeg | Animação e montagem do lyric video do jingle |
+| faster-whisper | Transcrição do jingle para sincronizar cada palavra da letra |
 | Prettier | Formatação do código |
 
 **Hospedagem:** GitHub Pages e Vercel.

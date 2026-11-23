@@ -55,7 +55,7 @@
             </p>
             <div class="hero-cta">
               <a class="btn btn-y" href="#urna">Votar na urna</a>
-              <a class="btn btn-o" href="#jingle">Ouvir o jingle</a>
+              <a class="btn btn-o" href="#jingle">Cantar o jingle</a>
             </div>
           </div>
           <div class="hero-photo">
@@ -204,13 +204,18 @@
         <div class="wrap">
           <p class="eyebrow">Karaokê oficial</p>
           <h2 class="sec-title">Vem com a gente, Brasil!</h2>
-          <div class="player">
-            <button class="play" id="play" aria-label="Tocar o jingle">▶</button>
-            <div class="prog" id="prog" aria-hidden="true"><i id="progBar"></i></div>
-            <span class="tempo" id="tempo">0:00</span>
+          <p class="karaoke-sub">Dê o play e cante junto: a letra aparece no ritmo da música.</p>
+          <div class="karaoke">
+            <video
+              id="karaoke"
+              controls
+              playsinline
+              preload="metadata"
+              poster="src/assets/jingle-karaoke.webp"
+              src="src/assets/jingle-karaoke.mp4"
+              aria-label="Vídeo com a letra do jingle Vem com a gente, Brasil"
+            ></video>
           </div>
-          <audio id="audio" preload="auto" src="src/assets/jingle.mp3"></audio>
-          <div class="letra" id="letra"></div>
         </div>
       </section>
 
