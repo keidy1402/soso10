@@ -2997,3 +2997,53 @@ details.q-dica summary {
 .ph-screen {
   position: relative;
 }
+
+/* explicação do porquê */
+.q-sheet {
+  max-height: 62%;
+  overflow-y: auto;
+}
+.q-sua {
+  margin-top: 6px;
+  font-size: 14px;
+}
+.q-sua s {
+  text-decoration-thickness: 2px;
+}
+.q-certa {
+  margin-top: 4px;
+  font-size: 15px;
+}
+.q-porque b {
+  font-size: 15px;
+}
+.q-porque {
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: calc(14px * var(--fs));
+  color: var(--t);
+  line-height: 1.4;
+}
+.q-mais {
+  margin-top: 6px;
+  font-size: calc(14px * var(--fs));
+}
+.q-mais summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+.q-mais[open] {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  padding: 8px 12px;
+  color: var(--t);
+}
+.rev-e {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}

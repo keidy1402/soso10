@@ -104,6 +104,7 @@ Protótipo navegável, dentro de um celular desenhado na tela, do aplicativo gra
 **Mecânicas inspiradas no Duolingo:**
 - **Vidas:** cada erro tira uma; dá para recuperar com gemas ou revisando erros.
 - **XP e combo:** pontos por lição e bônus por acertos seguidos.
+- **Explicação do porquê:** ao errar, o app mostra a resposta dada, a resposta certa e uma explicação de por que ela está certa e as outras não. Ao acertar, a explicação fica num botão "Por quê?". As 80 questões têm explicação, que também aparece na Revisão dos erros.
 - **Repetição do erro:** a questão errada volta no fim da lição.
 - **Tela de conclusão:** mostra XP, precisão e tempo.
 - **Sequência de dias** e **meta diária**.

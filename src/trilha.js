@@ -139,6 +139,7 @@
   /* ---------- telas ---------- */
   const T = {};
   /* o conteúdo das lições (MATERIAS) vem de src/licoes.js */
+
   /* ---------- questões ---------- */
   const pizza = (n, com) => {
     let s =
@@ -413,6 +414,16 @@
     if (q.k === "type")
       return `<div style="padding:0 18px"><input class="q-in ${Q.res === "ok" ? "cert" : Q.res === "no" ? "err" : ""}" data-txt value="${esc(Q.txt)}" placeholder="${esc(q.ph || "Digite a resposta")}" aria-label="Sua resposta" autocomplete="off" autocapitalize="off" ${Q.res ? "disabled" : ""}></div>`;
   }
+  const suaResp = (q) =>
+    q.k === "mc" || q.k === "tf"
+      ? Q.sel !== null
+        ? q.o[Q.sel]
+        : ""
+      : q.k === "type"
+        ? Q.txt.trim()
+        : q.k === "order"
+          ? q.resp.map((i) => q.w.concat(q.x || [])[i]).join(" ")
+          : "";
   const respCerta = (q) =>
     q.k === "mc" || q.k === "tf" ? q.o[q.c] : q.k === "order" ? q.w.join(" ") : q.k === "type" ? q.a[0] : "";
   function podeVerificar(q) {
@@ -442,7 +453,7 @@
  ${corpoQ(q)}
  ${!Q.res && q.d && q.k !== "pairs" ? `<details class="q-dica"><summary>💡 Ver dica</summary>${esc(q.d)}</details>` : ""}
  <div class="q-espaco"></div>
- <div class="q-sheet ${Q.res || ""}">${Q.res === "ok" ? `<div class="q-fb"><b>${Q.combo >= 3 ? `🔥 ${Q.combo} seguidas!` : ["Mandou bem!", "Isso aí!", "Perfeito!", "Excelente!"][Q.i % 4]}</b></div>` : Q.res === "no" ? `<div class="q-fb"><b>Resposta certa:</b><br>${esc(respCerta(q))}${q.d ? `<div class="a-sm" style="color:inherit;margin-top:4px">💡 ${esc(q.d)}</div>` : ""}</div>` : ""}
+ <div class="q-sheet ${Q.res || ""}">${Q.res === "ok" ? `<div class="q-fb"><b>${Q.combo >= 3 ? `🔥 ${Q.combo} seguidas!` : ["Mandou bem!", "Isso aí!", "Perfeito!", "Excelente!"][Q.i % 4]}</b>${q.e ? (q.k === "pairs" && q.errou ? `<div class="q-porque"><b>Você trocou alguns pares. Por quê?</b><br>${esc(q.e)}</div>` : `<details class="q-mais"><summary>Por quê?</summary>${esc(q.e)}</details>`) : ""}</div>` : Q.res === "no" ? `<div class="q-fb"><b>Ops, não foi dessa vez</b>${suaResp(q) ? `<div class="q-sua">Você ${q.k === "type" ? "escreveu" : q.k === "order" ? "montou" : "marcou"}: <s>${esc(suaResp(q))}</s></div>` : ""}<div class="q-certa"><b>Resposta certa:</b> ${esc(respCerta(q))}</div>${q.e ? `<div class="q-porque"><b>Por quê?</b><br>${esc(q.e)}</div>` : q.d ? `<div class="q-porque">💡 ${esc(q.d)}</div>` : ""}</div>` : ""}
  ${q.k === "pairs" && !Q.res ? `<p class="q-save" style="margin:0 0 8px">Toque numa palavra da esquerda e depois no par dela</p>` : `<button class="a-btn ${Q.res === "no" ? "err" : Q.res === "ok" ? "ok" : "verde"}" data-act="${Q.res ? "proxima" : "verificar"}" ${!Q.res && !podeVerificar(q) ? "disabled" : ""}>${Q.res ? "Continuar" : "Verificar"}</button>`}
  ${Q.res ? "" : `<div class="q-save">${offline ? "Sem internet · tudo salvo no celular" : "Lição salva no celular · funciona sem internet"}</div>`}</div>`;
   };
@@ -642,7 +653,7 @@
  ${
    e
      ? `<div class="rev-card" style="margin-top:14px"><div class="a-flex" style="font-size:12px;opacity:.8"><span>Revisão</span><span>1 de ${S.erros.length}</span></div><div style="font-size:24px;font-weight:900;line-height:1.15">${e.q}</div><div style="font-size:13px;opacity:.8">Você errou essa antes. Vamos de novo?</div>
- ${mostra ? `<div class="resp">${e.r}</div><div style="display:flex;gap:8px"><button class="a-btn" style="background:var(--g)" data-rev="1">Acertei</button><button class="a-btn" style="background:#fff;color:var(--n)" data-rev="0">Errei</button></div>` : `<button class="a-btn y" data-act="mostrar" style="margin-top:auto">Mostrar resposta</button>`}</div>`
+ ${mostra ? `<div class="resp">${e.r}</div>${e.e ? `<div class="rev-e"><b>Por quê?</b> ${esc(e.e)}</div>` : ""}<div style="display:flex;gap:8px"><button class="a-btn" style="background:var(--g)" data-rev="1">Acertei</button><button class="a-btn" style="background:#fff;color:var(--n)" data-rev="0">Errei</button></div>` : `<button class="a-btn y" data-act="mostrar" style="margin-top:auto">Mostrar resposta</button>`}</div>`
      : `<div class="a-card" style="margin-top:14px;text-align:center"><div style="font-size:42px">✅</div><b>Nada para revisar hoje!</b><p class="a-sm">Os erros voltam aqui em intervalos cada vez maiores.</p></div>`
  }
  <div class="a-sec">Cada acerto sobe um degrau</div>
@@ -1162,7 +1173,7 @@
       Q.erros++;
       Q.combo = 0;
       S.vidas = Math.max(0, S.vidas - 1);
-      S.erros.push({ q: q.t, r: respCerta(q), d: 0 });
+      S.erros.push({ q: q.t, r: respCerta(q), d: 0, e: q.e });
       if (!q.rep) Q.qs.push(prepara(Object.assign({}, q._o, { rep: true })));
       save();
       som("no");
